@@ -16,8 +16,8 @@ type ReturnBean struct {
 
 type ReturnDataBean struct {
 	Type     string `json:"type,default=sendAll"`
-	FromPlat string `json:"fromPlat,default=0,optional"` //uid,cid
-	FromUid  int64  `json:"fromUid,default=0,optional"`  //谁发的
+	FromType string `json:"fromType,default=0,optional"` //user,admin,group
+	From     int64  `json:"from,default=0,optional"`     //谁发的
 	Msg      string `json:"msg"`
 }
 
