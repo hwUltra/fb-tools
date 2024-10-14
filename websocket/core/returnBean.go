@@ -2,9 +2,8 @@ package core
 
 import (
 	"encoding/json"
-	"github.com/hwUltra/fb-tools/xerr"
+	"github.com/hwUltra/fb-tools/result"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc/status"
 )
 
 // ReturnBean 返回
@@ -44,22 +43,15 @@ func ReturnBeanMsg(msg string) []byte {
 
 func ReturnBeanError(err error) []byte {
 
-	errCode := xerr.SERVER_COMMON_ERROR
+	errCode := uint32(10001)
 	errMsg := "服务器开小差啦，稍后再来试一试"
 
-	causeErr := errors.Cause(err)                // err类型
-	if e, ok := causeErr.(*xerr.CodeError); ok { //自定义错误类型
+	causeErr := errors.Cause(err) // err类型
+	var e *result.CodeError
+	if errors.As(causeErr, &e) { //自定义错误类型
 		//自定义CodeError
 		errCode = e.GetErrCode()
 		errMsg = e.GetErrMsg()
-	} else {
-		if gStatus, ok := status.FromError(causeErr); ok { // grpc err错误
-			grpcCode := uint32(gStatus.Code())
-			if xerr.IsCodeErr(grpcCode) { //区分自定义错误跟系统底层、db等错误，底层、db错误不能返回给前端
-				errCode = grpcCode
-				errMsg = gStatus.Message()
-			}
-		}
 	}
 
 	msg, _ := json.Marshal(&ReturnBean{Code: errCode, Msg: errMsg})
