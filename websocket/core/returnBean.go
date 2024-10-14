@@ -9,20 +9,13 @@ import (
 
 // ReturnBean 返回
 type ReturnBean struct {
-	Code uint32         `json:"code"`
-	Msg  string         `json:"msg,optional"`
-	Data ReturnDataBean `json:"data,optional"`
-}
-
-type ReturnDataBean struct {
-	Type     string `json:"type,default=sendAll"`
-	FromType string `json:"fromType,default=0,optional"` //user,admin,group
-	From     int64  `json:"from,default=0,optional"`     //谁发的
-	Msg      string `json:"msg"`
+	Code uint32      `json:"code"`
+	Msg  string      `json:"msg,optional"`
+	Data interface{} `json:"data,optional"`
 }
 
 // NewReturnBean 创建ReturnBean
-func NewReturnBean(data ReturnDataBean, code uint32, msg string) *ReturnBean {
+func NewReturnBean(data interface{}, code uint32, msg string) *ReturnBean {
 	return &ReturnBean{
 		Code: code,
 		Msg:  msg,
@@ -30,7 +23,7 @@ func NewReturnBean(data ReturnDataBean, code uint32, msg string) *ReturnBean {
 	}
 }
 
-func ReturnBeanSuccess(data ReturnDataBean) []byte {
+func ReturnBeanSuccess(data interface{}) []byte {
 	msgByte, _ := json.Marshal(
 		&ReturnBean{
 			Code: 200,
