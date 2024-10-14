@@ -20,6 +20,16 @@ func GetToken(secretKey string, iat, seconds, userId int64) (string, error) {
 	return token.SignedString([]byte(secretKey))
 }
 
+func GetUidFromCtx(ctx context.Context) int64 {
+	var uid int64
+	if jsonUid, ok := ctx.Value(CtxKeyJwtUid).(json.Number); ok {
+		if int64Uid, err := jsonUid.Int64(); err == nil {
+			uid = int64Uid
+		}
+	}
+	return uid
+}
+
 func GetUid(ctx context.Context) int64 {
 	uid, _ := ctx.Value(CtxKeyJwtUid).(json.Number).Int64()
 	return uid

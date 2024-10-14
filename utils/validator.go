@@ -21,7 +21,7 @@ func ValidatorCheck(r *http.Request, req interface{}) error {
 	validateErr := translations.RegisterDefaultTranslations(validate, trans)
 	if validateErr = validate.StructCtx(r.Context(), req); validateErr != nil {
 		for _, err := range validateErr.(validator.ValidationErrors) {
-			return xerr.NewErrCodeMsg(xerr.REUQES_PARAM_ERROR, errors.New(err.Translate(trans)).Error())
+			return xerr.NewErrCodeMsg(100001, errors.New(err.Translate(trans)).Error())
 		}
 	}
 	return nil

@@ -3,7 +3,7 @@ package rpcserver
 import (
 	"context"
 
-	"github.com/hwUltra/fb-tools/xerr"
+	"github.com/hwUltra/fb-tools/result"
 
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -20,8 +20,9 @@ func LoggerInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySer
 
 	resp, err = handler(ctx, req)
 	if err != nil {
-		causeErr := errors.Cause(err)                // err类型
-		if e, ok := causeErr.(*xerr.CodeError); ok { //自定义错误类型
+		causeErr := errors.Cause(err) // err类型
+		var e *result.CodeError
+		if errors.As(causeErr, &e) { //自定义错误类型
 			logx.WithContext(ctx).Errorf("【RPC-SRV-ERR】 %+v", err)
 
 			//转成grpc err

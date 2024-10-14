@@ -1,16 +1,16 @@
-package xerr
+package result
 
 import (
 	"fmt"
 )
 
-/**
-常用通用固定错误
-*/
-
 type CodeError struct {
 	errCode uint32
 	errMsg  string
+}
+
+func NewErrCodeMsg(errCode uint32, errMsg string) *CodeError {
+	return &CodeError{errCode: errCode, errMsg: errMsg}
 }
 
 // GetErrCode 返回给前端的错误码
@@ -25,15 +25,4 @@ func (e *CodeError) GetErrMsg() string {
 
 func (e *CodeError) Error() string {
 	return fmt.Sprintf("ErrCode:%d，ErrMsg:%s", e.errCode, e.errMsg)
-}
-
-func NewErrCodeMsg(errCode uint32, errMsg string) *CodeError {
-	return &CodeError{errCode: errCode, errMsg: errMsg}
-}
-func NewErrCode(errCode uint32) *CodeError {
-	return &CodeError{errCode: errCode, errMsg: MapErrMsg(errCode)}
-}
-
-func NewErrMsg(errMsg string) *CodeError {
-	return &CodeError{errCode: SERVER_COMMON_ERROR, errMsg: errMsg}
 }

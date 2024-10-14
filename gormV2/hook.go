@@ -2,12 +2,13 @@ package gormV2
 
 import (
 	"fmt"
-	"github.com/hwUltra/fb-tools/globalkey"
 	"gorm.io/gorm"
 	"reflect"
 	"strings"
 	"time"
 )
+
+var dateTimeFormatStandardTime = "2006-01-02 15:04:05"
 
 // 这里的函数都是gorm的hook函数，拦截一些官方认为标准提示，但是我们认为不合格的操作行为，提升项目整体的完美性
 
@@ -29,19 +30,19 @@ func CreateBeforeHook(gormDB *gorm.DB) {
 				row := destValueOf.Index(i)
 				if row.Type().Kind() == reflect.Struct {
 					if b, column := structHasSpecialField("CreatedAt", row); b {
-						destValueOf.Index(i).FieldByName(column).Set(reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+						destValueOf.Index(i).FieldByName(column).Set(reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 					}
 					if b, column := structHasSpecialField("UpdatedAt", row); b {
-						destValueOf.Index(i).FieldByName(column).Set(reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+						destValueOf.Index(i).FieldByName(column).Set(reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 					}
 
 				} else if row.Type().Kind() == reflect.Map {
 					fmt.Println("111 reflect.Map ")
 					if b, column := structHasSpecialField("created_at", row); b {
-						row.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+						row.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 					}
 					if b, column := structHasSpecialField("updated_at", row); b {
-						row.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+						row.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 					}
 				}
 			}
@@ -49,17 +50,17 @@ func CreateBeforeHook(gormDB *gorm.DB) {
 			//  if destValueOf.Type().Kind() == reflect.Struct
 			// 参数校验无错误自动设置 CreatedAt、 UpdatedAt
 			if b, column := structHasSpecialField("CreatedAt", gormDB.Statement.Dest); b {
-				gormDB.Statement.SetColumn(column, time.Now().Format(globalkey.DateTimeFormatStandardTime))
+				gormDB.Statement.SetColumn(column, time.Now().Format(dateTimeFormatStandardTime))
 			}
 			if b, column := structHasSpecialField("UpdatedAt", gormDB.Statement.Dest); b {
-				gormDB.Statement.SetColumn(column, time.Now().Format(globalkey.DateTimeFormatStandardTime))
+				gormDB.Statement.SetColumn(column, time.Now().Format(dateTimeFormatStandardTime))
 			}
 		} else if destValueOf.Type().Kind() == reflect.Map {
 			if b, column := structHasSpecialField("created_at", gormDB.Statement.Dest); b {
-				destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+				destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 			}
 			if b, column := structHasSpecialField("updated_at", gormDB.Statement.Dest); b {
-				destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+				destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 			}
 		}
 	}
@@ -80,12 +81,12 @@ func UpdateBeforeHook(gormDB *gorm.DB) {
 	} else if reflect.TypeOf(gormDB.Statement.Dest).Kind() == reflect.Ptr && reflect.ValueOf(gormDB.Statement.Dest).Elem().Kind() == reflect.Struct {
 		// 参数校验无错误自动设置 UpdatedAt
 		if b, column := structHasSpecialField("UpdatedAt", gormDB.Statement.Dest); b {
-			gormDB.Statement.SetColumn(column, time.Now().Format(globalkey.DateTimeFormatStandardTime))
+			gormDB.Statement.SetColumn(column, time.Now().Format(dateTimeFormatStandardTime))
 		}
 	} else if reflect.TypeOf(gormDB.Statement.Dest).Kind() == reflect.Ptr && reflect.ValueOf(gormDB.Statement.Dest).Elem().Kind() == reflect.Map {
 		if b, column := structHasSpecialField("updated_at", gormDB.Statement.Dest); b {
 			destValueOf := reflect.ValueOf(gormDB.Statement.Dest).Elem()
-			destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(globalkey.DateTimeFormatStandardTime)))
+			destValueOf.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 		}
 	}
 }
