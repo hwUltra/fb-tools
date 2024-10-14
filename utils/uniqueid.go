@@ -1,4 +1,4 @@
-package uniqueid
+package utils
 
 import (
 	"fmt"

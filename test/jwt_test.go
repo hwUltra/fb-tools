@@ -2,8 +2,8 @@ package test
 
 import (
 	"fmt"
-	"github.com/hwUltra/fb-tools/ghelp"
 	"github.com/hwUltra/fb-tools/jwtx"
+	"github.com/hwUltra/fb-tools/utils/ghelp"
 	"testing"
 )
 

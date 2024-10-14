@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fast-boot/app/rpc/model"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -12,21 +11,21 @@ func TestGormBuilder(t *testing.T) {
 	dsn := "root:123456@tcp(192.168.3.88:3306)/boot?charset=utf8mb4&parseTime=True&loc=Local"
 	db, _ := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	fmt.Println("db = ", db)
-	m := model.PmsGoodsModel{}
-	db.Preload("Shop", "status = 1").
-		Preload("Category", "visible = 1").
-		Preload("Brand").
-		Preload("Skus").
-		Preload("SpecList", "type = 1").
-		Preload("AttrList", "type = 2").
-		Debug().First(&m, 1)
-	fmt.Println("goods = ", m)
-	fmt.Println("Shop = ", m.Shop)
-	fmt.Println("Category = ", m.Category)
-	fmt.Println("Brand = ", m.Brand)
-	fmt.Println("Skus = ", m.SkuList)
-	fmt.Println("SpecList = ", m.SpecList)
-	fmt.Println("AttrList = ", m.AttrList)
+	//m := model.PmsGoodsModel{}
+	//db.Preload("Shop", "status = 1").
+	//	Preload("Category", "visible = 1").
+	//	Preload("Brand").
+	//	Preload("Skus").
+	//	Preload("SpecList", "type = 1").
+	//	Preload("AttrList", "type = 2").
+	//	Debug().First(&m, 1)
+	//fmt.Println("goods = ", m)
+	//fmt.Println("Shop = ", m.Shop)
+	//fmt.Println("Category = ", m.Category)
+	//fmt.Println("Brand = ", m.Brand)
+	//fmt.Println("Skus = ", m.SkuList)
+	//fmt.Println("SpecList = ", m.SpecList)
+	//fmt.Println("AttrList = ", m.AttrList)
 
 	/**
 		Shop        PmsShopModel     `gorm:"foreignKey:ShopId"`

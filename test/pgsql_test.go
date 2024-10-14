@@ -15,7 +15,7 @@ type User struct {
 }
 
 func TestPGSql(t *testing.T) {
-	dsn := "host=192.168.3.88 user=kyle password=kyle@2023 dbname=mall-boot port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=192.168.3.88 user=kyle password=kyle@2023 dbname=mall-boot port=15432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	//fmt.Print("TestPGSql", db, err)
 

@@ -1,4 +1,4 @@
-package cryptx
+package utils
 
 import (
 	"fmt"
