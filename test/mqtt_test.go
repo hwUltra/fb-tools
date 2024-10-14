@@ -3,7 +3,7 @@ package test
 import (
 	"fmt"
 	"github.com/hwUltra/fb-tools/mqttx"
-	"github.com/hwUltra/fb-tools/utils/ghelp"
+	"github.com/hwUltra/fb-tools/utils"
 	"testing"
 	"time"
 )
@@ -119,6 +119,6 @@ func TestMqttSub(t *testing.T) {
 func TestA(t *testing.T) {
 	s1 := []string{"a", "b", "c", "d"}
 	s2 := []string{"a", "d"}
-	s3 := ghelp.RemoveElements(s1, s2)
+	s3 := utils.RemoveElements(s1, s2)
 	fmt.Println(s3)
 }

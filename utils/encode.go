@@ -1,6 +1,6 @@
 // json常用编码、解码操作
 
-package ghelp
+package utils
 
 import (
 	"crypto/hmac"

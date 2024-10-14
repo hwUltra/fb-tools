@@ -3,7 +3,7 @@ package test
 import (
 	"fmt"
 	"github.com/hwUltra/fb-tools/jwtx"
-	"github.com/hwUltra/fb-tools/utils/ghelp"
+	"github.com/hwUltra/fb-tools/utils"
 	"testing"
 )
 
@@ -18,7 +18,7 @@ func Test_Jwt_Parse(t *testing.T) {
 func Test_Arr(t *testing.T) {
 	arr := []int{1, 2, 4, 3, 5, 5}
 	brr := []int{6, 7, 8, 4, 5}
-	m := ghelp.ArrayIntersection(arr, brr)
+	m := utils.ArrayIntersection(arr, brr)
 	fmt.Println(m)
 
 }

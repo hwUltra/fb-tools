@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"github.com/hwUltra/fb-tools/ghelp"
+	"github.com/hwUltra/fb-tools/utils"
 )
 
 type MqttX struct {
@@ -112,7 +112,7 @@ func (mx *MqttX) Unsubscribe(topics ...string) error {
 	if tc := mx.Client.Unsubscribe(topics...); tc.Wait() && tc.Error() != nil {
 		return tc.Error()
 	}
-	mx.topics = ghelp.RemoveElements(mx.topics, topics)
+	mx.topics = utils.RemoveElements(mx.topics, topics)
 	return nil
 }
 

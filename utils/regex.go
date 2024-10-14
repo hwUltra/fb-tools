@@ -1,4 +1,4 @@
-package ghelp
+package utils
 
 import (
 	"fmt"
