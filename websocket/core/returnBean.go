@@ -41,6 +41,15 @@ func ReturnBeanMsg(msg string) []byte {
 	return msgByte
 }
 
+func ReturnBeanFail(msg string) []byte {
+	msgByte, _ := json.Marshal(
+		&ReturnBean{
+			Code: 10001,
+			Msg:  msg,
+		})
+	return msgByte
+}
+
 func ReturnBeanError(err error) []byte {
 
 	errCode := uint32(10001)

@@ -16,11 +16,11 @@ require (
 	github.com/minio/minio-go/v7 v7.0.78
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/pkg/errors v0.9.1
-	github.com/silenceper/wechat/v2 v2.1.6
+	github.com/silenceper/wechat/v2 v2.1.7
 	github.com/zeromicro/go-zero v1.7.2
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.28.0
-	google.golang.org/grpc v1.67.0
+	google.golang.org/grpc v1.67.1
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/driver/sqlserver v1.5.3
