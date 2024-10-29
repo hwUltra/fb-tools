@@ -3,7 +3,7 @@ module github.com/hwUltra/fb-tools
 go 1.22
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.27
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.40
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-pay/gopay v1.5.106
 	github.com/go-playground/locales v0.14.1
@@ -51,7 +51,6 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
