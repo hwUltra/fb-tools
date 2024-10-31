@@ -14,7 +14,7 @@ type WxPayTool struct {
 	Client *wechat.ClientV3
 }
 
-func GetWxClient(conf WxConf) (*WxPayTool, error) {
+func NewWxPayTool(conf WxConf) (*WxPayTool, error) {
 	client, err := wechat.NewClientV3(conf.MchId, conf.SerialNo, conf.ApiV3Key, conf.PrivateKey)
 	if err != nil {
 		return nil, err

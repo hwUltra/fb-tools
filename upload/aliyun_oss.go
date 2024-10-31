@@ -1,4 +1,17 @@
-package files
+package upload
+
+import "mime/multipart"
+
+type AliyunOSS struct{}
+
+func (*AliyunOSS) UploadFile(file *multipart.FileHeader) (string, string, error) {
+
+	return "", "", nil
+}
+
+//func NewBucket() (*oss.Bucket, error) {
+//
+//}
 
 //
 //import (

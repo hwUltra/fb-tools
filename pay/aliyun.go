@@ -17,7 +17,7 @@ type AliPayTool struct {
 	Client *alipay.Client
 }
 
-func GetAliClient(conf AliConf) *AliPayTool {
+func NewAliPyTool(conf AliConf) *AliPayTool {
 	var syOnce sync.Once
 	var aliPayClient *alipay.Client
 	syOnce.Do(func() {
