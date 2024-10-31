@@ -47,8 +47,8 @@ func GetSqlDriver(conf Conf) (*gorm.DB, error) {
 		err = gormDb.Use(
 			dbresolver.Register(resolverConf).
 				SetConnMaxLifetime(time.Duration(conf.Read.SetConnMaxLifetime) * time.Second).
-				SetMaxIdleConns(conf.Read.SetMaxIdleConns).
-				SetMaxOpenConns(conf.Read.SetMaxOpenConns),
+				SetMaxIdleConns(conf.Read.SetMaxIdleConn).
+				SetMaxOpenConns(conf.Read.SetMaxIdleConn),
 		)
 		if err != nil {
 			//gorm 数据库驱动初始化失败
@@ -70,8 +70,8 @@ func GetSqlDriver(conf Conf) (*gorm.DB, error) {
 	} else {
 		rawDb.SetConnMaxIdleTime(time.Second * 30)
 		rawDb.SetConnMaxLifetime(time.Duration(conf.Read.SetConnMaxLifetime) * time.Second)
-		rawDb.SetMaxIdleConns(conf.Write.SetMaxIdleConns)
-		rawDb.SetMaxOpenConns(conf.Write.SetMaxOpenConns)
+		rawDb.SetMaxIdleConns(conf.Write.SetMaxIdleConn)
+		rawDb.SetMaxOpenConns(conf.Write.SetMaxIdleConn)
 		return gormDb, nil
 	}
 

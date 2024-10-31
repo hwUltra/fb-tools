@@ -1,4 +1,4 @@
-package wsTools
+package wsCore
 
 import (
 	"flag"

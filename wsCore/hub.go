@@ -1,4 +1,4 @@
-package core
+package wsCore
 
 type Hub struct {
 	//上线注册
