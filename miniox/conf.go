@@ -1,12 +1,13 @@
 package miniox
 
-type Conf struct {
+type MinioConf struct {
 	MinIOAccessKeyID     string `json:"minIOAccessKeyID"`     //admin
 	MinIOAccessSecretKey string `json:"minIOAccessSecretKey"` //MinIOAccessSecretKey
 	MinIOEndpoint        string `json:"minIOEndpoint"`        //localhost:9000
 	MinIOBucketLocation  string `json:"minIOBucketLocation"`  //cn-north-1
 	MinIOSSLBool         bool   `json:"minIOSSLBool"`
 	MinIOBucket          string `json:"minIOBucket"` //mymusic
+	MinIOFile            string `json:"MinIOFile"`
 	MinIOBasePath        string `json:"minIoBasePath"`
 	//MinIOBucketPolicy    string `json:"minIOBucketPolicy"`
 }

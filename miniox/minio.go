@@ -12,52 +12,39 @@ import (
 )
 
 type MinioX struct {
-	Conf Conf
+	conf        MinioConf
+	minioClient *minio.Client
 }
 
-//func CreateMinioX(accessKeyID string, accessSecretKey string, endpoint string, bucket string) *MinioX {
-//	return &MinioX{
-//		Conf: Conf{
-//			MinIOAccessKeyID:     accessKeyID,
-//			MinIOAccessSecretKey: accessSecretKey,
-//			MinIOEndpoint:        endpoint,
-//			MinIOBucket:          bucket,
-//		},
-//	}
-//}
-
-func CreateMinioX(conf Conf) *MinioX {
+func NewMinioX(conf MinioConf) *MinioX {
+	minioClient, _ := minio.New(
+		conf.MinIOEndpoint,
+		&minio.Options{
+			Creds:  credentials.NewStaticV4(conf.MinIOAccessKeyID, conf.MinIOAccessSecretKey, ""),
+			Secure: conf.MinIOSSLBool,
+		})
 	return &MinioX{
-		Conf: conf,
+		conf:        conf,
+		minioClient: minioClient,
 	}
 }
 
 // MinIOUpload 上传到自建的minio中
 func (m *MinioX) MinIOUpload(r *http.Request) (*UploadInfo, error) {
 
-	minioClient, err := minio.New(m.Conf.MinIOEndpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(m.Conf.MinIOAccessKeyID, m.Conf.MinIOAccessSecretKey, ""),
-		Secure: m.Conf.MinIOSSLBool,
-	})
+	//获取文件信息
+	file, fileHeader, err := r.FormFile(m.conf.MinIOFile)
 	if err != nil {
 		return nil, err
 	}
 
-	//fmt.Println("err01", err)
-	// // 获取文件信息
-	file, fileHeader, err := r.FormFile(m.Conf.MinIOBucket)
-	if err != nil {
-		return nil, err
-	}
-
-	//fmt.Println("err02", err)
 	ext := path.Ext(fileHeader.Filename)
 	objectName := fmt.Sprintf("%02d/%02d/%02d/",
 		time.Now().Year(), time.Now().Month(), time.Now().Day()) + uuid.New().String() + ext
 
-	info, err := minioClient.PutObject(context.Background(), m.Conf.MinIOBucket, objectName, file, fileHeader.Size,
+	info, err := m.minioClient.PutObject(context.Background(), m.conf.MinIOBucket, objectName, file, fileHeader.Size,
 		minio.PutObjectOptions{ContentType: "binary/octet-stream"})
-	//fmt.Println("err03", err)
+	fmt.Println("err03", err)
 	return &UploadInfo{
 		Path: info.Bucket + "/" + info.Key,
 		Name: objectName,
