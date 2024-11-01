@@ -1,4 +1,4 @@
-package upload
+package uploadx
 
 import (
 	"errors"
@@ -14,12 +14,17 @@ import (
 
 var mu sync.Mutex
 
-type Local struct {
-	StorePath string
-	Path      string
+type LocalOSS struct {
+	conf LocalConf
 }
 
-func (u *Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
+func NewLocalOSS(conf LocalConf) *LocalOSS {
+	return &LocalOSS{
+		conf: conf,
+	}
+}
+
+func (m *LocalOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
 	// 读取文件后缀
 	ext := filepath.Ext(file.Filename)
 	// 读取文件名并加密
@@ -28,34 +33,39 @@ func (u *Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 	// 拼接新文件名
 	filename := name + "_" + time.Now().Format("20060102150405") + ext
 	// 尝试创建此路径
-	mkdirErr := os.MkdirAll(u.StorePath, os.ModePerm)
-	if mkdirErr != nil {
-		return "", "", mkdirErr
+	err := os.MkdirAll(m.conf.StorePath, os.ModePerm)
+	if err != nil {
+		return nil, err
 	}
 	// 拼接路径和文件名
-	p := u.StorePath + "/" + filename
-	filepath := u.Path + "/" + filename
+	p := m.conf.StorePath + "/" + filename
+	filepath := m.conf.Path + "/" + filename
 
-	f, openError := file.Open() // 读取文件
-	if openError != nil {
-		return "", "", openError
+	f, err := file.Open() // 读取文件
+	if err != nil {
+		return nil, err
 	}
 	defer f.Close() // 创建文件 defer 关闭
 
-	out, createErr := os.Create(p)
-	if createErr != nil {
-		return "", "", createErr
+	out, err := os.Create(p)
+	if err != nil {
+		return nil, err
 	}
 	defer out.Close() // 创建文件 defer 关闭
 
-	_, copyErr := io.Copy(out, f) // 传输（拷贝）文件
-	if copyErr != nil {
-		return "", "", copyErr
+	_, err = io.Copy(out, f) // 传输（拷贝）文件
+	if err != nil {
+		return nil, err
 	}
-	return filepath, filename, nil
+	return &UploadInfo{
+		Path: filepath,
+		Name: filename,
+		Size: file.Size,
+		Ext:  ext,
+	}, nil
 }
 
-func (u *Local) DeleteFile(key string) error {
+func (m *LocalOSS) DeleteFile(key string) error {
 	// 检查 key 是否为空
 	if key == "" {
 		return errors.New("key不能为空")
@@ -65,18 +75,14 @@ func (u *Local) DeleteFile(key string) error {
 	if strings.Contains(key, "..") || strings.ContainsAny(key, `\/:*?"<>|`) {
 		return errors.New("非法的key")
 	}
-
-	p := filepath.Join(u.StorePath, key)
-
+	p := filepath.Join(m.conf.StorePath, key)
 	// 检查文件是否存在
 	if _, err := os.Stat(p); os.IsNotExist(err) {
 		return errors.New("文件不存在")
 	}
-
 	// 使用文件锁防止并发删除
 	mu.Lock()
 	defer mu.Unlock()
-
 	err := os.Remove(p)
 	if err != nil {
 		return errors.New("文件删除失败: " + err.Error())

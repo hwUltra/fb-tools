@@ -44,7 +44,6 @@ func (m *MinioX) MinIOUpload(r *http.Request) (*UploadInfo, error) {
 
 	info, err := m.minioClient.PutObject(context.Background(), m.conf.MinIOBucket, objectName, file, fileHeader.Size,
 		minio.PutObjectOptions{ContentType: "binary/octet-stream"})
-	fmt.Println("err03", err)
 	return &UploadInfo{
 		Path: info.Bucket + "/" + info.Key,
 		Name: objectName,
