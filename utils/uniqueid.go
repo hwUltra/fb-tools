@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-// 生成单号
+// GenSn 生成单号
 func GenSn(prefix string) string {
-	return fmt.Sprintf("%s%s%s", prefix, time.Now().Format("20060102150405"), Krand(8, KC_RAND_KIND_NUM))
+	return fmt.Sprintf("%s%s%s", prefix, time.Now().Format("20060102150405"), KRand(8, KC_RAND_KIND_NUM))
 }
 
 const (
@@ -18,8 +18,8 @@ const (
 	KC_RAND_KIND_ALL   = 3 // 数字、大小写字母
 )
 
-// 随机字符串
-func Krand(size int, kind int) string {
+// KRand 随机字符串
+func KRand(size int, kind int) string {
 	ikind, kinds, result := kind, [][]int{[]int{10, 48}, []int{26, 97}, []int{26, 65}}, make([]byte, size)
 	is_all := kind > 2 || kind < 0
 	rand.Seed(time.Now().UnixNano())

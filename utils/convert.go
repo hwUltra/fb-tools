@@ -1,10 +1,21 @@
 package utils
 
 import (
+	"reflect"
+	"runtime"
 	"strconv"
 )
 
-// Tostring 转成字符串 多个字符串可拼接
+// NewObjectPtr 复制一个对象，返回指针类型的空对象
+func NewObjectPtr(i interface{}) interface{} {
+	t := reflect.TypeOf(i)
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	return reflect.New(t).Interface()
+}
+
+// ToString 转成字符串 多个字符串可拼接
 func ToString(args ...interface{}) string {
 	result := ""
 	for _, arg := range args {
@@ -74,4 +85,9 @@ func ToInt(arg interface{}) int64 {
 	}
 
 	return result
+}
+
+// GetFuncName get function name
+func GetFuncName(i interface{}) string {
+	return runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 }
