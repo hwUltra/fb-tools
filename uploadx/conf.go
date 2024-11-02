@@ -14,13 +14,13 @@ const (
 
 type OSSConf struct {
 	Type        OssType     `json:"type"`
-	LocalConf   LocalConf   `json:"localConf"`
-	MinIoConf   MinIoConf   `json:"minioConf"`
-	AliYunConf  AliYunConf  `json:"aliyunConf"`
-	TencentConf TencentConf `json:"tencentConf"`
-	QiNiuConf   QiNiuConf   `json:"qiNiuConf"`
-	AwsConf     AwsConf     `json:"awsConf"`
-	HuaWeiConf  HuaWeiConf  `json:"huaWeiConf"`
+	LocalConf   LocalConf   `json:"localConf,omitempty,optional"`
+	MinIoConf   MinIoConf   `json:"minioConf,omitempty,optional"`
+	AliYunConf  AliYunConf  `json:"aliyunConf,omitempty,optional"`
+	TencentConf TencentConf `json:"tencentConf,omitempty,optional"`
+	QiNiuConf   QiNiuConf   `json:"qiNiuConf,omitempty,optional"`
+	AwsConf     AwsConf     `json:"awsConf,omitempty,optional"`
+	HuaWeiConf  HuaWeiConf  `json:"huaWeiConf,omitempty,optional"`
 }
 
 type LocalConf struct {

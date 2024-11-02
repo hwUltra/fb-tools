@@ -12,7 +12,7 @@ func NewQiNiuOSS(conf QiNiuConf) *QiNiuOSS {
 	}
 }
 
-func (*QiNiuOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
+func (*QiNiuOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
 
 	return nil, nil
 }

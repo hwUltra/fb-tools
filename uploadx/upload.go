@@ -3,7 +3,7 @@ package uploadx
 import "mime/multipart"
 
 type OSS interface {
-	UploadFile(file *multipart.FileHeader) (*UploadInfo, error)
+	UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error)
 	DeleteFile(key string) error
 }
 

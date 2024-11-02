@@ -12,7 +12,7 @@ func NewTencentOSS(conf TencentConf) *TencentOSS {
 	}
 }
 
-func (*TencentOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
+func (*TencentOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
 
 	return nil, nil
 }

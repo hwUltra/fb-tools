@@ -12,7 +12,7 @@ func NewAwsOSS(conf AwsConf) *AwsOSS {
 	}
 }
 
-func (*AwsOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
+func (*AwsOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
 
 	return nil, nil
 }

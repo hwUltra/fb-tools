@@ -1,15 +1,13 @@
 package uploadx
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"io"
 	"mime/multipart"
-	"path/filepath"
+	"path"
 	"time"
 )
 
@@ -31,26 +29,13 @@ func NewMinioOSS(conf MinIoConf) *MinioOSS {
 	}
 }
 
-func (m *MinioOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
+func (m *MinioOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
 
-	f, err := file.Open()
-	if err != nil {
-		return nil, err
-	}
-
-	fileContent := bytes.Buffer{}
-	_, err = io.Copy(&fileContent, f)
-	if err != nil {
-		return nil, err
-	}
-	_ = f.Close()
-
-	ext := filepath.Ext(file.Filename)
+	ext := path.Ext(fileHeader.Filename)
 	objectName := fmt.Sprintf("%02d/%02d/%02d/",
 		time.Now().Year(), time.Now().Month(), time.Now().Day()) + uuid.New().String() + ext
 
-	info, err := m.minioClient.PutObject(context.Background(), m.conf.MinIOBucket,
-		objectName, &fileContent, file.Size,
+	info, err := m.minioClient.PutObject(context.Background(), m.conf.MinIOBucket, objectName, file, fileHeader.Size,
 		minio.PutObjectOptions{ContentType: "binary/octet-stream"})
 	if err != nil {
 		return nil, err

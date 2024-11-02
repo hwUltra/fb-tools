@@ -12,11 +12,13 @@ func NewAliOSS(conf AliYunConf) *AliOSS {
 	}
 }
 
-func (*AliOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
+// UploadFile todo
+func (*AliOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
 
 	return nil, nil
 }
 
+// DeleteFile todo
 func (*AliOSS) DeleteFile(key string) error {
 	return nil
 }

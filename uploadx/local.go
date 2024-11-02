@@ -24,28 +24,18 @@ func NewLocalOSS(conf LocalConf) *LocalOSS {
 	}
 }
 
-func (m *LocalOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
-	// 读取文件后缀
-	ext := filepath.Ext(file.Filename)
-	// 读取文件名并加密
-	name := strings.TrimSuffix(file.Filename, ext)
+func (m *LocalOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHeader) (*UploadInfo, error) {
+
+	ext := filepath.Ext(fileHeader.Filename)
+	name := strings.TrimSuffix(fileHeader.Filename, ext)
 	name = utils.MD5V(name)
-	// 拼接新文件名
 	filename := name + "_" + time.Now().Format("20060102150405") + ext
-	// 尝试创建此路径
 	err := os.MkdirAll(m.conf.StorePath, os.ModePerm)
 	if err != nil {
 		return nil, err
 	}
-	// 拼接路径和文件名
 	p := m.conf.StorePath + "/" + filename
-	filepath := m.conf.Path + "/" + filename
-
-	f, err := file.Open() // 读取文件
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close() // 创建文件 defer 关闭
+	filePath := m.conf.Path + "/" + filename
 
 	out, err := os.Create(p)
 	if err != nil {
@@ -53,14 +43,14 @@ func (m *LocalOSS) UploadFile(file *multipart.FileHeader) (*UploadInfo, error) {
 	}
 	defer out.Close() // 创建文件 defer 关闭
 
-	_, err = io.Copy(out, f) // 传输（拷贝）文件
+	_, err = io.Copy(out, file) // 传输（拷贝）文件
 	if err != nil {
 		return nil, err
 	}
 	return &UploadInfo{
-		Path: filepath,
+		Path: filePath,
 		Name: filename,
-		Size: file.Size,
+		Size: fileHeader.Size,
 		Ext:  ext,
 	}, nil
 }
