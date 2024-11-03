@@ -14,7 +14,22 @@ import (
 	"time"
 )
 
-//gorm.io/plugin/soft_delete
+type Client struct {
+	Conf   Conf
+	GormDb *gorm.DB
+}
+
+func NewClient(conf Conf) (*Client, error) {
+	gormDb, err := GetSqlDriver(conf)
+	if err != nil {
+		return nil, err
+	}
+	return &Client{
+		Conf:   conf,
+		GormDb: gormDb,
+	}, nil
+
+}
 
 func GetSqlDriver(conf Conf) (*gorm.DB, error) {
 	var dbDialector gorm.Dialector
