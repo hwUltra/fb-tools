@@ -1,4 +1,4 @@
-package gormc
+package gormx
 
 import (
 	"context"

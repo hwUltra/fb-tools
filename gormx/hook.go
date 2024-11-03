@@ -1,4 +1,4 @@
-package gormV2
+package gormx
 
 import (
 	"fmt"
@@ -17,12 +17,10 @@ func MaskNotDataError(gormDB *gorm.DB) {
 	gormDB.Statement.RaiseErrorOnNotFound = false
 }
 
-// InterceptCreatePramsNotPtrError 拦截 create 函数参数如果是非指针类型的错误,新用户最容犯此错误
+// CreateBeforeHook  InterceptCreatePramsNotPtrError 拦截 create 函数参数如果是非指针类型的错误,新用户最容犯此错误
 func CreateBeforeHook(gormDB *gorm.DB) {
 
-	if reflect.TypeOf(gormDB.Statement.Dest).Kind() != reflect.Ptr {
-		fmt.Println("ErrorsGormDBCreateParamsNotPtr")
-	} else {
+	if reflect.TypeOf(gormDB.Statement.Dest).Kind() == reflect.Ptr {
 		destValueOf := reflect.ValueOf(gormDB.Statement.Dest).Elem()
 		if destValueOf.Type().Kind() == reflect.Slice || destValueOf.Type().Kind() == reflect.Array {
 			inLen := destValueOf.Len()
@@ -37,7 +35,6 @@ func CreateBeforeHook(gormDB *gorm.DB) {
 					}
 
 				} else if row.Type().Kind() == reflect.Map {
-					fmt.Println("111 reflect.Map ")
 					if b, column := structHasSpecialField("created_at", row); b {
 						row.SetMapIndex(reflect.ValueOf(column), reflect.ValueOf(time.Now().Format(dateTimeFormatStandardTime)))
 					}

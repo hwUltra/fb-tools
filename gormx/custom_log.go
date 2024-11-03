@@ -1,4 +1,4 @@
-package gormV2
+package gormx
 
 import (
 	"context"
@@ -15,8 +15,8 @@ import (
 // 自定义日志格式, 对 gorm 自带日志进行拦截重写
 func createCustomGormLog(options ...Options) gormLog.Interface {
 	var (
-		infoStr      = "%s\n[info] "
-		
+		infoStr = "%s\n[info] "
+
 		warnStr      = "%s\n[warn] "
 		errStr       = "%s\n[error] "
 		traceStr     = "%s\n[%.3fms] [rows:%v] %s"
@@ -70,7 +70,7 @@ func (f OptionFunc) apply(log *logger) {
 	f(log)
 }
 
-//SetInfoStrFormat  定义 6 个函数修改内部变量
+// SetInfoStrFormat  定义 6 个函数修改内部变量
 func SetInfoStrFormat(format string) Options {
 	return OptionFunc(func(log *logger) {
 		log.infoStr = format
