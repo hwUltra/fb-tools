@@ -1,4 +1,4 @@
-package gormV2
+package gormx
 
 import (
 	"errors"
