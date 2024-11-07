@@ -3,9 +3,9 @@ package mqttx
 type Conf struct {
 	Host     string `json:"host"`
 	Port     int    `json:"port"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	ClientId string `json:"clientId"`
+	Username string `json:"username,optional"`
+	Password string `json:"password,optional"`
+	ClientId string `json:"clientId,optional"`
 	//Qos      byte   `json:"qos"`
 	//Tls      bool   `json:"tls"`
 	//Action   string `json:"action"`

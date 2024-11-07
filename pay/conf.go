@@ -15,9 +15,9 @@ type WxConf struct {
 
 // AliConf 微信支付配置
 type AliConf struct {
-	AppId      string `json:"app_id"`
-	PrivateKey string `json:"private_key"`
-	PublicKey  string `json:"public_key"`
-	IsProd     bool   `json:"is_prod"`
-	NotifyUrl  string `json:"notifyUrl"`
+	AppId      string `json:"app_id,optional"`
+	PrivateKey string `json:"private_key,optional"`
+	PublicKey  string `json:"public_key,optional"`
+	IsProd     bool   `json:"is_prod,optional"`
+	NotifyUrl  string `json:"notifyUrl,optional"`
 }
