@@ -8,7 +8,7 @@ import (
 func NewCaptchaTool(conf CaptchaConf) *CaptchaTool {
 	var store base64Captcha.Store
 	if conf.Store == RedisType {
-		store = NewRedisStore(conf.RedisConf)
+		store = NewCacheStore(conf.CacheConf)
 	} else {
 		store = base64Captcha.DefaultMemStore
 	}

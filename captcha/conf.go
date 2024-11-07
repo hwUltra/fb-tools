@@ -2,7 +2,7 @@ package captchaTool
 
 import (
 	"github.com/mojocn/base64Captcha"
-	"github.com/zeromicro/go-zero/core/stores/redis"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 )
 
 type CaptchaType int
@@ -32,7 +32,7 @@ const (
 type CaptchaConf struct {
 	Type      CaptchaType
 	Store     StoreType
-	RedisConf redis.RedisConf
+	CacheConf cache.CacheConf
 }
 
 type CaptchaTool struct {

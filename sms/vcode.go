@@ -3,23 +3,30 @@ package sms
 import (
 	"bytes"
 	"errors"
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/syncx"
 	"math"
 	"math/rand"
 	"strconv"
 	"time"
-
-	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 
 type VCode struct {
-	Config      VCodeConf
-	RedisClient *redis.Redis
-	AliSms      *AliSms
+	Config VCodeConf
+	Cache  cache.Cache
+	AliSms *AliSms
 }
 
-func NewVCode(config VCodeConf, redisClient *redis.Redis) *VCode {
+var (
+	singleFlights = syncx.NewSingleFlight()
+	stats         = cache.NewStat("VCodeCache")
+	cacheErr      = errors.New("not found")
+)
+
+func NewVCode(config VCodeConf, cacheConf cache.CacheConf) *VCode {
 	aliSms := NewAliSms(config.AliConf)
-	return &VCode{config, redisClient, aliSms}
+	cacheClient := cache.New(cacheConf, singleFlights, stats, cacheErr)
+	return &VCode{config, cacheClient, aliSms}
 }
 
 // Send 发送
@@ -34,21 +41,24 @@ func (v *VCode) Send(template string, mobile string) error {
 			return nil
 		}
 	}
-
+	//查看是否发送
 	key := v.getKey(template, mobile)
-	isExists, _ := v.RedisClient.Exists(key)
-	if isExists {
+	res := ""
+	if err := v.Cache.Get(key, &res); err == nil {
 		return errors.New("验证码已发送，请勿重复请求")
 	}
-	//缓存
+	//生成缓存
 	code := RandCode(v.Config.Length)
-	err := v.RedisClient.Setex(key, code, v.Config.Life)
-	if err != nil {
-		return err
-	}
 	//发送短信
 	aliSms := AliSms{}
-	return aliSms.SendCode(template, mobile, code)
+	if err := aliSms.SendCode(template, mobile, code); err != nil {
+		return err
+	}
+	if err := v.Cache.SetWithExpire(key, code, v.Config.Life*time.Second); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 // Check 验证
@@ -70,15 +80,14 @@ func (v *VCode) Check(template string, mobile string, code string) error {
 	// 正常校验
 	key := v.getKey(template, mobile)
 
-	vCode, err := v.RedisClient.Get(key)
-	if err != nil {
-		return errors.New("验证码有误")
+	vCode := ""
+	if err := v.Cache.Get(key, &vCode); err != nil {
+		return errors.New("验证码已过期")
 	}
 	if vCode != code {
 		return errors.New("验证码有误")
 	}
-	_, _ = v.RedisClient.Del(key)
-	return nil
+	return v.Cache.Del(key)
 }
 
 func (v *VCode) getKey(template string, mobile string) string {

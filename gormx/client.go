@@ -19,6 +19,11 @@ type Client struct {
 	GormDb *gorm.DB
 }
 
+func MustNewClient(conf Conf) *Client {
+	client, _ := NewClient(conf)
+	return client
+}
+
 func NewClient(conf Conf) (*Client, error) {
 	gormDb, err := GetSqlDriver(conf)
 	if err != nil {
@@ -28,7 +33,6 @@ func NewClient(conf Conf) (*Client, error) {
 		Conf:   conf,
 		GormDb: gormDb,
 	}, nil
-
 }
 
 func GetSqlDriver(conf Conf) (*gorm.DB, error) {

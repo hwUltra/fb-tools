@@ -1,5 +1,7 @@
 package sms
 
+import "time"
+
 type VCodeTypeEnum int
 
 const (
@@ -12,7 +14,7 @@ type VCodeConf struct {
 	Type      VCodeTypeEnum
 	Debug     bool
 	Length    int
-	Life      int
+	Life      time.Duration
 	MagicCode string
 	TestUsers []string
 	Template  Template

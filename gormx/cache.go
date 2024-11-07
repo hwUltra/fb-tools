@@ -1,6 +1,7 @@
 package gormx
 
 import (
+	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/syncx"
 	"gorm.io/gorm"
@@ -12,6 +13,7 @@ type SelectCallback func(key string) (any, error)
 type CacheTool struct {
 	Cache cache.Cache
 	Db    *gorm.DB
+	//Rsc   *redis.Redis
 }
 
 var (
@@ -26,6 +28,10 @@ func NewCacheTool(conf cache.CacheConf, db *gorm.DB) *CacheTool {
 		cc,
 		db,
 	}
+}
+
+func (m *CacheTool) FormatPrimary(keyPrefix string, primary any) string {
+	return fmt.Sprintf("%s%v", keyPrefix, primary)
 }
 
 func (m *CacheTool) CreateUpdate(model any, callBack TodoCallback) (int64, error) {

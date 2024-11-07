@@ -3,7 +3,7 @@ module github.com/hwUltra/fb-tools
 go 1.22
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.40
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.48
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-pay/gopay v1.5.106
 	github.com/go-playground/locales v0.14.1
@@ -12,8 +12,8 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/websocket v1.5.3
-	github.com/hibiken/asynq v0.24.1
-	github.com/minio/minio-go/v7 v7.0.78
+	github.com/hibiken/asynq v0.25.0
+	github.com/minio/minio-go/v7 v7.0.80
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/pkg/errors v0.9.1
 	github.com/silenceper/wechat/v2 v2.1.7
@@ -86,7 +86,7 @@ require (
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/spf13/cast v1.4.1 // indirect
+	github.com/spf13/cast v1.7.0 // indirect
 	github.com/tidwall/gjson v1.14.1 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
