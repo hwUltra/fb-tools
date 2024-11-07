@@ -54,7 +54,7 @@ func (v *VCode) Send(template string, mobile string) error {
 	if err := aliSms.SendCode(template, mobile, code); err != nil {
 		return err
 	}
-	if err := v.Cache.SetWithExpire(key, code, v.Config.Life*time.Second); err != nil {
+	if err := v.Cache.SetWithExpire(key, code, time.Duration(v.Config.Life)*time.Second); err != nil {
 		return err
 	}
 	return nil

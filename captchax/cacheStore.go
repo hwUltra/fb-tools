@@ -1,10 +1,11 @@
-package captchaTool
+package captchax
 
 import (
 	"errors"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/syncx"
+	"time"
 )
 
 type CacheStore struct {
@@ -29,7 +30,7 @@ func captchaKey(id string) string {
 }
 
 func (cs *CacheStore) Set(id string, value string) error {
-	return cs.Cache.SetWithExpire(captchaKey(id), value, 600)
+	return cs.Cache.SetWithExpire(captchaKey(id), value, 600*time.Second)
 }
 
 func (cs *CacheStore) Get(id string, clear bool) (res string) {
