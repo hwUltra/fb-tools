@@ -1,12 +1,12 @@
 package utils
 
 import (
+	"errors"
 	"github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	translations "github.com/go-playground/validator/v10/translations/zh"
 	"github.com/hwUltra/fb-tools/result"
-	"github.com/pkg/errors"
 	"net/http"
 	"reflect"
 )
