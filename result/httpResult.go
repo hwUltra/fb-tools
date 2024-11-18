@@ -22,15 +22,14 @@ func HttpResult(r *http.Request, w http.ResponseWriter, resp interface{}, err er
 		errCode := uint32(10001)
 		errMsg := "服务器开小差啦，稍后再来试一试"
 
-		causeErr := errors.Unwrap(err)
-
+		//causeErr := errors.Unwrap(err)
 		// err类型
 		var e *CodeError
-		if errors.As(causeErr, &e) { //自定义错误类型
+		if errors.As(err, &e) { //自定义错误类型
 			errCode = e.GetErrCode()
 			errMsg = e.GetErrMsg()
 		} else {
-			if gStatus, ok := status.FromError(causeErr); ok { // grpc err错误
+			if gStatus, ok := status.FromError(err); ok { // grpc err错误
 				errCode = uint32(gStatus.Code())
 				errMsg = gStatus.Message()
 			}
@@ -52,14 +51,12 @@ func AuthHttpResult(r *http.Request, w http.ResponseWriter, resp interface{}, er
 		errCode := uint32(10001)
 		errMsg := "服务器开小差啦，稍后再来试一试"
 
-		causeErr := errors.Unwrap(err)
-		// err类型
 		var e *CodeError
-		if errors.As(causeErr, &e) { //自定义错误类型
+		if errors.As(err, &e) { //自定义错误类型
 			errCode = e.GetErrCode()
 			errMsg = e.GetErrMsg()
 		} else {
-			if gStatus, ok := status.FromError(causeErr); ok { // grpc err错误
+			if gStatus, ok := status.FromError(err); ok { // grpc err错误
 				errCode = uint32(gStatus.Code())
 				errMsg = gStatus.Message()
 			}
@@ -74,9 +71,8 @@ func AuthHttpResult(r *http.Request, w http.ResponseWriter, resp interface{}, er
 // ParamErrorResult http 参数错误返回
 func ParamErrorResult(r *http.Request, w http.ResponseWriter, err error) {
 	errMsg := ""
-	causeErr := errors.Unwrap(err)
 	var e *CodeError
-	if errors.As(causeErr, &e) { //自定义错误类型
+	if errors.As(err, &e) { //自定义错误类型
 		errMsg = fmt.Sprintf("参数错误 ,%s", e.GetErrMsg())
 	} else {
 		errMsg = fmt.Sprintf("参数错误 ,%s", err)
