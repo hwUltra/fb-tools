@@ -33,6 +33,5 @@ func (x *EmailClient) Send(to []string, subject string, body string) error {
 	} else {
 		err = e.Send(hostAddr, auth)
 	}
-
 	return err
 }
