@@ -10,12 +10,12 @@ const (
 type VCodeConf struct {
 	AliConf   AliConf
 	Type      VCodeTypeEnum
-	Debug     bool
-	Length    int
-	Life      int64
-	MagicCode string
-	TestUsers []string
-	Template  Template
+	Debug     bool                `json:"debug,default=false"`
+	Length    int                 `json:"length,default=6"`
+	Life      int64               `json:"life,default=300"`
+	MagicCode string              `json:"magicCode,omitempty,optional"`
+	TestUsers []string            `json:"testUsers,omitempty,optional"`
+	Template  []map[string]string `json:"template,omitempty,optional"`
 }
 
 type AliConf struct {
@@ -23,8 +23,4 @@ type AliConf struct {
 	AccessKeyId  string
 	AccessSecret string
 	SignName     string
-}
-
-type Template struct {
-	Reg string
 }
