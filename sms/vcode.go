@@ -51,7 +51,8 @@ func (v *VCode) Send(template string, mobile string) error {
 	code := RandCode(v.Config.Length)
 	//发送短信
 	aliSms := AliSms{}
-	if err := aliSms.SendCode(template, mobile, code); err != nil {
+
+	if err := aliSms.SendCode(v.Config.Template[template], mobile, code); err != nil {
 		return err
 	}
 	if err := v.Cache.SetWithExpire(key, code, time.Duration(v.Config.Life)*time.Second); err != nil {
