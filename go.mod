@@ -4,7 +4,6 @@ go 1.22.7
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.63.54
-	github.com/duke-git/lancet/v2 v2.3.3
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-pay/gopay v1.5.106
 	github.com/go-playground/locales v0.14.1

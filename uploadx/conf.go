@@ -96,8 +96,8 @@ type CloudflareR2Conf struct {
 }
 
 type UploadInfo struct {
-	Hash string `json:"hash"`
-	Ext  string `json:"ext"`
-	Size int64  `json:"size"`
 	Path string `json:"path"`
+	Hash string `json:"hash,optional"`
+	Ext  string `json:"ext,optional"`
+	Size int64  `json:"size,optional"`
 }

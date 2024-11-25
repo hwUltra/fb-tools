@@ -49,7 +49,6 @@ func (m *LocalOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHea
 	}
 	return &UploadInfo{
 		Path: filePath,
-		Name: filename,
 		Size: fileHeader.Size,
 		Ext:  ext,
 	}, nil
