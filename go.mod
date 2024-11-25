@@ -3,7 +3,8 @@ module github.com/hwUltra/fb-tools
 go 1.22.7
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.52
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.54
+	github.com/duke-git/lancet/v2 v2.3.3
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-pay/gopay v1.5.106
 	github.com/go-playground/locales v0.14.1
@@ -18,12 +19,12 @@ require (
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/silenceper/wechat/v2 v2.1.7
 	github.com/xuri/excelize/v2 v2.9.0
-	github.com/zeromicro/go-zero v1.7.3
+	github.com/zeromicro/go-zero v1.7.4
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.29.0
 	google.golang.org/grpc v1.68.0
 	gorm.io/driver/mysql v1.5.7
-	gorm.io/driver/postgres v1.5.9
+	gorm.io/driver/postgres v1.5.10
 	gorm.io/driver/sqlserver v1.5.4
 	gorm.io/gorm v1.25.12
 	gorm.io/plugin/dbresolver v1.5.3
@@ -37,9 +38,8 @@ require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/duke-git/lancet/v2 v2.3.3 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/fatih/color v1.17.0 // indirect
+	github.com/fatih/color v1.18.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-ini/ini v1.67.0 // indirect
@@ -110,14 +110,14 @@ require (
 	go.uber.org/automaxprocs v1.6.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/image v0.18.0 // indirect
-	golang.org/x/net v0.30.0 // indirect
+	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/sync v0.9.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
-	golang.org/x/time v0.7.0 // indirect
+	golang.org/x/time v0.8.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240903143218-8af14fe29dc1 // indirect
-	google.golang.org/protobuf v1.35.1 // indirect
+	google.golang.org/protobuf v1.35.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

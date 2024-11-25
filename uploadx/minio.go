@@ -42,8 +42,7 @@ func (m *MinioOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHea
 	}
 
 	return &UploadInfo{
-		Path: info.Bucket + "/" + info.Key,
-		Name: objectName,
+		Path: objectName,
 		Size: info.Size,
 		Ext:  ext,
 		Hash: info.ETag,
