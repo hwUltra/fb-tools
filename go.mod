@@ -14,7 +14,7 @@ require (
 	github.com/gorilla/websocket v1.5.3
 	github.com/hibiken/asynq v0.25.0
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
-	github.com/minio/minio-go/v7 v7.0.80
+	github.com/minio/minio-go/v7 v7.0.81
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/silenceper/wechat/v2 v2.1.7
 	github.com/xuri/excelize/v2 v2.9.0

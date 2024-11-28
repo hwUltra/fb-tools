@@ -28,14 +28,14 @@ type ClientMoreParams struct {
 type MsgBean struct {
 	Type string `json:"type,default=sendAll"`
 	To   string `json:"to,default=0"`
-	Data string `json:"data,optional"`
+	Data string `json:"data,optional,omitempty"`
 }
 
 // ReturnBean 返回
 type ReturnBean struct {
 	Code uint32      `json:"code"`
-	Msg  string      `json:"msg,optional"`
-	Data interface{} `json:"data,optional"`
+	Msg  string      `json:"msg,optional,omitempty"`
+	Data interface{} `json:"data,optional,omitempty"`
 }
 
 // NewReturnBean 创建ReturnBean
@@ -86,7 +86,6 @@ func ReturnBeanError(err error) []byte {
 		errCode = e.GetErrCode()
 		errMsg = e.GetErrMsg()
 	}
-
 	msg, _ := json.Marshal(&ReturnBean{Code: errCode, Msg: errMsg})
 	return msg
 }
