@@ -5,6 +5,7 @@ import (
 	"github.com/silenceper/wechat/v2/cache"
 	"github.com/silenceper/wechat/v2/miniprogram"
 	"github.com/silenceper/wechat/v2/miniprogram/auth"
+	"github.com/silenceper/wechat/v2/miniprogram/business"
 	miniConfig "github.com/silenceper/wechat/v2/miniprogram/config"
 	"github.com/silenceper/wechat/v2/miniprogram/encryptor"
 	"github.com/silenceper/wechat/v2/miniprogram/subscribe"
@@ -41,6 +42,11 @@ func (m *MiniTool) Code2Session(code string) (auth.ResCode2Session, error) {
 // Decrypt  消息解密
 func (m *MiniTool) Decrypt(sessionKey string, encryptedData string, iv string) (plainData *encryptor.PlainData, err error) {
 	return m.Mini.GetEncryptor().Decrypt(sessionKey, encryptedData, iv)
+}
+
+// GetPhoneNumber code 换取手机号码
+func (m *MiniTool) GetPhoneNumber(code string) (plainData business.PhoneInfo, err error) {
+	return m.Mini.GetBusiness().GetPhoneNumber(&business.GetPhoneNumberRequest{Code: code})
 }
 
 // Send 发送订阅消息
