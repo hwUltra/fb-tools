@@ -8,7 +8,7 @@ type Hub struct {
 	//所有在线客户端的内存地址
 	Clients map[*Client]bool
 	// Inbound messages from the clients.
-	broadcast chan []byte
+	Broadcast chan []byte
 }
 
 func CreateHubFactory() *Hub {
@@ -16,7 +16,7 @@ func CreateHubFactory() *Hub {
 		Register:   make(chan *Client),
 		UnRegister: make(chan *Client),
 		Clients:    make(map[*Client]bool),
-		broadcast:  make(chan []byte),
+		Broadcast:  make(chan []byte),
 	}
 }
 
@@ -30,7 +30,7 @@ func (h *Hub) Run() {
 				delete(h.Clients, client)
 				close(client.Send)
 			}
-		case message := <-h.broadcast:
+		case message := <-h.Broadcast:
 			for client := range h.Clients {
 				select {
 				case client.Send <- message:

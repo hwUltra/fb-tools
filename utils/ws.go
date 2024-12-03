@@ -1,4 +1,4 @@
-package wsCore
+package utils
 
 import (
 	"flag"
@@ -7,7 +7,7 @@ import (
 	"net/url"
 )
 
-func SendMsg(host string, path string, query string, protocol []string, data []byte) error {
+func WsSendMsg(host string, path string, query string, protocol []string, data []byte) error {
 	var addr = flag.String("addr", host, "http service address")
 	u := url.URL{Scheme: "ws", Host: *addr, Path: path, RawQuery: query}
 
