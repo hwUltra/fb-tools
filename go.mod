@@ -3,7 +3,7 @@ module github.com/hwUltra/fb-tools
 go 1.22.7
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.63
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.68
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/go-pay/gopay v1.5.106
 	github.com/go-playground/locales v0.14.1
@@ -18,7 +18,7 @@ require (
 	github.com/silenceper/wechat/v2 v2.1.7
 	github.com/zeromicro/go-zero v1.7.4
 	go.uber.org/zap v1.27.0
-	golang.org/x/crypto v0.29.0
+	golang.org/x/crypto v0.31.0
 	google.golang.org/grpc v1.68.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
@@ -103,9 +103,9 @@ require (
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/image v0.18.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
-	golang.org/x/sync v0.9.0 // indirect
-	golang.org/x/sys v0.27.0 // indirect
-	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.8.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240903143218-8af14fe29dc1 // indirect
