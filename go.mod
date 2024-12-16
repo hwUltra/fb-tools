@@ -19,7 +19,11 @@ require (
 	github.com/zeromicro/go-zero v1.7.4
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.31.0
+<<<<<<< HEAD
 	google.golang.org/grpc v1.69.0
+=======
+	google.golang.org/grpc v1.68.0
+>>>>>>> e84a834fb0bdb266c318cb6868c6f5d465afdc6a
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlserver v1.5.4
