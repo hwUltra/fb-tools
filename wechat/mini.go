@@ -53,12 +53,3 @@ func (m *MiniTool) GetPhoneNumber(code string) (plainData business.PhoneInfo, er
 func (m *MiniTool) Send(msg *subscribe.Message) error {
 	return m.Mini.GetSubscribe().Send(msg)
 }
-
-//wechat.Send(&subscribe.Message{
-//	ToUser:           "",
-//	TemplateID:       "",
-//	Page:             "",
-//	Data:             nil,
-//	MiniprogramState: "",
-//	Lang:             "",
-//})
