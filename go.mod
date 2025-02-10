@@ -3,9 +3,9 @@ module github.com/hwUltra/fb-tools
 go 1.22.7
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.63.83
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.86
 	github.com/eclipse/paho.mqtt.golang v1.5.0
-	github.com/go-pay/gopay v1.5.107
+	github.com/go-pay/gopay v1.5.108
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.24.0
@@ -13,13 +13,13 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/hibiken/asynq v0.25.1
-	github.com/minio/minio-go/v7 v7.0.83
+	github.com/minio/minio-go/v7 v7.0.85
 	github.com/mojocn/base64Captcha v1.3.8
 	github.com/silenceper/wechat/v2 v2.1.7
 	github.com/zeromicro/go-zero v1.8.0
 	go.uber.org/zap v1.27.0
-	golang.org/x/crypto v0.32.0
-	google.golang.org/grpc v1.69.4
+	golang.org/x/crypto v0.33.0
+	google.golang.org/grpc v1.70.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlserver v1.5.4
@@ -105,9 +105,9 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/image v0.23.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
-	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/sync v0.11.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250115164207-1a7da9e5054f // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
