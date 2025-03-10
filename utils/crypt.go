@@ -2,6 +2,7 @@ package utils
 
 import (
 	"crypto/md5"
+	"encoding/base64"
 	"encoding/hex"
 	"fmt"
 
@@ -17,4 +18,9 @@ func MD5V(str string) string {
 	h := md5.New()
 	h.Write([]byte(str))
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+// Base64Md5 先base64，然后MD5
+func Base64Md5(params string) string {
+	return MD5V(base64.StdEncoding.EncodeToString([]byte(params)))
 }
