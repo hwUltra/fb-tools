@@ -27,7 +27,7 @@ require (
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/driver/sqlserver v1.5.4
 	gorm.io/gorm v1.26.0
-	gorm.io/plugin/dbresolver v1.5.3
+	gorm.io/plugin/dbresolver v1.6.0
 	gorm.io/plugin/soft_delete v1.2.1
 )
 
