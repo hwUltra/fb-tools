@@ -19,7 +19,7 @@ require (
 	github.com/minio/minio-go/v7 v7.0.91
 	github.com/mojocn/base64Captcha v1.3.8
 	github.com/silenceper/wechat/v2 v2.1.8
-	github.com/zeromicro/go-zero v1.8.4
+	github.com/zeromicro/go-zero v1.8.5
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.39.0
 	google.golang.org/grpc v1.73.0
@@ -88,7 +88,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/redis/go-redis/v9 v9.10.0 // indirect
+	github.com/redis/go-redis/v9 v9.11.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
