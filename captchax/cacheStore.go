@@ -3,9 +3,10 @@ package captchax
 import (
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/syncx"
-	"time"
 )
 
 type CacheStore struct {

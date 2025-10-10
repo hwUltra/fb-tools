@@ -4,12 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
+
 	"github.com/zeromicro/go-zero/core/logx"
 	"go.uber.org/zap"
 	gormLog "gorm.io/gorm/logger"
 	"gorm.io/gorm/utils"
-	"strings"
-	"time"
 )
 
 // 自定义日志格式, 对 gorm 自带日志进行拦截重写

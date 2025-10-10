@@ -2,9 +2,10 @@ package wsCore
 
 import (
 	"flag"
-	"github.com/gorilla/websocket"
 	"net/http"
 	"net/url"
+
+	"github.com/gorilla/websocket"
 )
 
 func SendMsg(host string, path string, query string, protocol []string, data []byte) error {

@@ -13,20 +13,18 @@ import (
 	"time"
 )
 
-// request method
+// MethodType request method
 type MethodType string
 
 type ContentType string
 
 const (
-	// method
 	Get    MethodType = "GET"
 	Post   MethodType = "POST"
 	Put    MethodType = "PUT"
 	Patch  MethodType = "PATCH"
 	Delete MethodType = "DELETE"
 
-	// content_type
 	JsonType  ContentType = "application/json"
 	FormType  ContentType = "application/x-www-form-urlencoded"
 	OtherType ContentType = "null" // need set header and body

@@ -3,10 +3,11 @@ package pay
 import (
 	"context"
 	"fmt"
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/wechat/v3"
 	"net/http"
 	"time"
+
+	"github.com/go-pay/gopay"
+	"github.com/go-pay/gopay/wechat/v3"
 )
 
 type WxPayTool struct {

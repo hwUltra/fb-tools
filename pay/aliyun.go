@@ -3,13 +3,14 @@ package pay
 import (
 	"context"
 	"fmt"
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/alipay"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
+
+	"github.com/go-pay/gopay"
+	"github.com/go-pay/gopay/alipay"
 )
 
 type AliPayTool struct {

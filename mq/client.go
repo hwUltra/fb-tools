@@ -2,8 +2,9 @@ package mq
 
 import (
 	"encoding/json"
-	"github.com/hibiken/asynq"
 	"time"
+
+	"github.com/hibiken/asynq"
 )
 
 type TaskClient struct {

@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/golang-jwt/jwt/v4"
 	"strconv"
+
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type JwtClient struct {
