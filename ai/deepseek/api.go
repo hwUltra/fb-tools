@@ -1,8 +1,9 @@
 package deepseek
 
 import (
-	"github.com/hwUltra/fb-tools/http_client"
 	"time"
+
+	"github.com/hwUltra/fb-tools/http_client"
 )
 
 type DeepSeekApi struct {

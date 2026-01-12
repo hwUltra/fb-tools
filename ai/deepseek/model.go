@@ -3,9 +3,10 @@ package deepseek
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+
 	"github.com/hwUltra/fb-tools/ai/deepseek/constant"
 	"github.com/hwUltra/fb-tools/ai/deepseek/types"
-	"io"
 )
 
 // ListModels list models ,doc link : https://api.deepseek.com/models

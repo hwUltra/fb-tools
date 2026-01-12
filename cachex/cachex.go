@@ -3,6 +3,7 @@ package cachex
 import (
 	"errors"
 	"fmt"
+
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/core/syncx"

@@ -3,9 +3,10 @@ package deepseek
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+
 	"github.com/hwUltra/fb-tools/ai/deepseek/constant"
 	"github.com/hwUltra/fb-tools/ai/deepseek/types"
-	"io"
 )
 
 // UserBalance gets user balance ,doc link: https://api-docs.deepseek.com/zh-cn/api/get-user-balance

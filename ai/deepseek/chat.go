@@ -4,11 +4,12 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"github.com/hwUltra/fb-tools/ai/deepseek/constant"
-	"github.com/hwUltra/fb-tools/ai/deepseek/types"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/hwUltra/fb-tools/ai/deepseek/constant"
+	"github.com/hwUltra/fb-tools/ai/deepseek/types"
 )
 
 // ChatCompletions chat completions api not stream
