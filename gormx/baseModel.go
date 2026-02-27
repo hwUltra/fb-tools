@@ -20,6 +20,13 @@ type BaseDel struct {
 	DeletedAt soft_delete.DeletedAt `gorm:"delete_at" json:"-"`
 }
 
+// Option 下拉选项（泛型）
+type Option[T any] struct {
+	Value    T           `json:"value"`
+	Label    string      `json:"label"`
+	Children []Option[T] `json:"children,omitempty"`
+}
+
 // Paginate 分页封装
 func Paginate(page int, pageSize int) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
