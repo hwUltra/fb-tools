@@ -46,8 +46,8 @@ func (t *CaptchaTool) VerifyCaptcha(id string, VerifyValue string, clear bool) b
 // mathConfig 生成图形化算术验证码配置
 func mathConfig() *base64Captcha.DriverMath {
 	mathType := &base64Captcha.DriverMath{
-		Height:          60,
-		Width:           240,
+		Height:          120,
+		Width:           480,
 		NoiseCount:      0,
 		ShowLineOptions: base64Captcha.OptionShowHollowLine,
 		BgColor: &color.RGBA{
