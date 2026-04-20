@@ -67,4 +67,5 @@ type Config struct {
 const (
 	TypeLocal  = "local"
 	TypeAliyun = "aliyun"
+	TypeMinio  = "minio"
 )
