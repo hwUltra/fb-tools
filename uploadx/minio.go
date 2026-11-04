@@ -3,12 +3,13 @@ package uploadx
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	"mime/multipart"
 	"path"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
 type MinioOSS struct {
@@ -42,7 +43,7 @@ func (m *MinioOSS) UploadFile(file multipart.File, fileHeader *multipart.FileHea
 	}
 
 	return &UploadInfo{
-		Path: objectName,
+		Path: fmt.Sprintf("%s/%s", m.conf.MinIOBasePath, objectName),
 		Size: info.Size,
 		Ext:  ext,
 		Hash: info.ETag,
