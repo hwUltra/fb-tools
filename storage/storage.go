@@ -65,8 +65,9 @@ type Config struct {
 }
 
 // StorageType 存储类型常量
+// StorageType 存储类型常量
 const (
 	TypeLocal  = "local"
 	TypeAliyun = "aliyun"
-	TypeMinio  = "minio"
+	TypeS3     = "s3"
 )

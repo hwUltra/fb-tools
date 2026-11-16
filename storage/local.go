@@ -1,12 +1,17 @@
 package storage
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
+
+// ErrIllegalPath 路径逃逸出存储根目录（防 ../ 路径遍历）
+var ErrIllegalPath = errors.New("非法文件路径")
 
 // LocalStorage 本地存储
 type LocalStorage struct {
@@ -24,6 +29,16 @@ func NewLocalStorage(basePath, baseURL string) *LocalStorage {
 	}
 }
 
+// resolve 校验 path 未逃逸出 basePath，返回绝对路径
+func (s *LocalStorage) resolve(path string) (string, error) {
+	base := filepath.Clean(s.basePath)
+	full := filepath.Clean(filepath.Join(base, path))
+	if full != base && !strings.HasPrefix(full, base+string(os.PathSeparator)) {
+		return "", ErrIllegalPath
+	}
+	return full, nil
+}
+
 // Upload 上传文件
 func (s *LocalStorage) Upload(path string, file io.Reader, contentType string) (string, error) {
 	return s.UploadWithOptions(path, file, &UploadOptions{
@@ -33,7 +48,10 @@ func (s *LocalStorage) Upload(path string, file io.Reader, contentType string) (
 
 // UploadWithOptions 带选项的上传
 func (s *LocalStorage) UploadWithOptions(path string, file io.Reader, opts *UploadOptions) (string, error) {
-	fullPath := filepath.Join(s.basePath, path)
+	fullPath, err := s.resolve(path)
+	if err != nil {
+		return "", err
+	}
 
 	// 确保目录存在
 	dir := filepath.Dir(fullPath)
@@ -41,7 +59,6 @@ func (s *LocalStorage) UploadWithOptions(path string, file io.Reader, opts *Uplo
 		return "", fmt.Errorf("创建目录失败: %w", err)
 	}
 
-	// 创建文件
 	dst, err := os.Create(fullPath)
 	if err != nil {
 		return "", fmt.Errorf("创建文件失败: %w", err)
@@ -53,13 +70,15 @@ func (s *LocalStorage) UploadWithOptions(path string, file io.Reader, opts *Uplo
 		return "", fmt.Errorf("写入文件失败: %w", err)
 	}
 
-	// 返回访问URL
 	return s.GetURL(path, 0)
 }
 
 // Delete 删除文件
 func (s *LocalStorage) Delete(path string) error {
-	fullPath := filepath.Join(s.basePath, path)
+	fullPath, err := s.resolve(path)
+	if err != nil {
+		return err
+	}
 	return os.Remove(fullPath)
 }
 
@@ -71,8 +90,11 @@ func (s *LocalStorage) GetURL(path string, expires time.Duration) (string, error
 
 // Exists 检查文件是否存在
 func (s *LocalStorage) Exists(path string) (bool, error) {
-	fullPath := filepath.Join(s.basePath, path)
-	_, err := os.Stat(fullPath)
+	fullPath, err := s.resolve(path)
+	if err != nil {
+		return false, err
+	}
+	_, err = os.Stat(fullPath)
 	if err == nil {
 		return true, nil
 	}
@@ -84,7 +106,10 @@ func (s *LocalStorage) Exists(path string) (bool, error) {
 
 // GetInfo 获取文件信息
 func (s *LocalStorage) GetInfo(path string) (*FileInfo, error) {
-	fullPath := filepath.Join(s.basePath, path)
+	fullPath, err := s.resolve(path)
+	if err != nil {
+		return nil, err
+	}
 	info, err := os.Stat(fullPath)
 	if err != nil {
 		return nil, err
