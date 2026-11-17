@@ -20,7 +20,7 @@ func TestFs(t *testing.T) {
 		SecretKey:        "rustfs-admin",
 		Bucket:           "public",
 		Domain:           "https://file.imguo.com",
-		PathNoBucketName: false,
+		PathNoBucketName: true,
 		BasePath:         "",
 	}
 	if err := storage.InitDefaultStorage(storageCfg); err != nil {

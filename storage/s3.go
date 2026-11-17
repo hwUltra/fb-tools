@@ -113,6 +113,8 @@ func (s *S3Storage) UploadWithOptions(path string, file io.Reader, opts *UploadO
 	if _, err := s.client.PutObject(context.Background(), putOpts); err != nil {
 		return "", fmt.Errorf("上传文件失败: %w", err)
 	}
+
+	fmt.Println("Upload:", path)
 	return s.GetURL(path, 0)
 }
 
